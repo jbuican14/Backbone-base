@@ -1,0 +1,22 @@
+.movie {
+  width: 20%;
+  height: 10vh;
+  background-color: rgb(153, 135, 113);
+  color: #fff;
+  margin: 1rem;
+}
+
+.details {
+  width: 80%;
+  margin: 1rem;
+  background-color: rgb(168, 147, 123);
+  color: #fff; 
+}
+
+.selected {
+  border: 2px #dacf75 solid;
+}
+
+#movies {
+  width: 40%; 
+}

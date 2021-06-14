@@ -1,0 +1,18 @@
+{
+  "name": "backbone-ch3",
+  "version": "1.0.0",
+  "description": "backbonejs movie app",
+  "main": "app/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "browserify app/app.js > static/bundle.js"
+  },
+  "author": "J",
+  "license": "ISC",
+  "dependencies": {
+    "backbone": "^1.1.2",
+    "backbone-jquery": "^1.0.1",
+    "backbone.marionette": "^2.4.7",
+    "browserify": "^17.0.0"
+  }
+}
