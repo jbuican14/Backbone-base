@@ -8,37 +8,62 @@ const Mn = require('backbone.marionette');
 $(document).ready(() => {
   const myApp = new Mn.Application();
   myApp.on('before:start', function () {
-    console.log('my app started');
+    console.log('before:start');
   });
-  console.log('init');
 
   myApp.on('start', function (opt) {
-    console.log('on start');
+    console.log('start');
   });
 
-  var RootView = Mn.LayoutView.extend({
-    el: 'body',
+  //models
+  myApp.Contact = Backbone.Model.extend({
+    defaults: {
+      firstName: 'Default Name',
+    },
+  });
+
+  myApp.ContactView = Mn.ItemView.extend({
+    template: '#contact-template',
+  });
+
+  const alice = new myApp.Contact({
+    // firstName: 'Alice',
+    lastName: 'Doe',
+    phoneNumber: '111-11111',
+  });
+
+  const aliceView = new myApp.ContactView({
+    model: alice,
   });
 
   myApp.addRegions({
     mainRegion: '#main-region',
   });
 
-  myApp.rootView = new RootView();
+  myApp.mainRegion.show(aliceView);
 
-  myApp.StaticView = Mn.ItemView.extend({
-    id: 'static-view',
-    tagName: 'ul',
-    className: 'instruction',
-    template: '#list-item-template',
-  });
-
-  // myApp.on('initialize:after', function () {
-  console.log('init after');
-
-  const staticView = new myApp.StaticView();
-  myApp.mainRegion.show(staticView);
+  // var RootView = Mn.LayoutView.extend({
+  //   el: 'body',
   // });
+
+  // myApp.addRegions({
+  //   mainRegion: '#main-region',
+  // });
+
+  // myApp.rootView = new RootView();
+
+  // myApp.StaticView = Mn.ItemView.extend({
+  //   id: 'static-view',
+  //   tagName: 'ul',
+  //   className: 'instruction',
+  //   template: '#list-item-template',
+  // });
+
+  // // myApp.on('initialize:after', function () {
+
+  // const staticView = new myApp.StaticView();
+  // myApp.mainRegion.show(staticView);
+  // // });
 
   myApp.start();
 });
