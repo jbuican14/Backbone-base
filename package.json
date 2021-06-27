@@ -11,8 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "backbone": "^1.1.2",
-    "backbone-jquery": "^1.0.1",
     "backbone.marionette": "^2.4.7",
-    "browserify": "^17.0.0"
+    "browserify": "^17.0.0",
+    "jquery-untouched": "^1.10.2"
   }
 }
