@@ -11,12 +11,20 @@
   npm i backbone.marionette@2.4.7
   + backbone.marionette@2.4.7
   npm i backbone-jquery
-  + backbone-jquery@1.0.1
  -->
-
     <link rel="stylesheet" href="static/style.css" type="text/css" />
   </head>
   <body>
+    <div class="container">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <span class="brand">Contact Manager</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="main-region" class="container">
       <p>
         Here is static content in the web page. You'll notice that it gets
@@ -27,6 +35,17 @@
     <script type="text/template" id="static-template">
       <p> Redering by Mn </p>
     </script>
+
+    <!-- chapter 2  -->
+    <script type="text/template" id="different-static-template">
+      <p> Text from a different template... </p>
+    </script>
+
+    <!-- excercise -->
+    <script type="text/template" id="list-item-template">
+      <li>One item</li>
+    </script>
+
     <script src="static/bundle.js"></script>
   </body>
 </html>

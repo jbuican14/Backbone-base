@@ -1,6 +1,7 @@
 const Backbone = require('backbone');
-const $ = require('jquery-untouched');
+const $ = (jQuery = require('jquery-untouched'));
 Backbone.$ = $;
+require('bootstrap');
 
 const Mn = require('backbone.marionette');
 // mn.$ = Backbone.$;
@@ -24,14 +25,22 @@ $(document).ready(() => {
   });
 
   myApp.rootView = new RootView();
+
   myApp.StaticView = Mn.ItemView.extend({
+    id: 'static-view',
+    tagName: 'span',
+    className: 'instruction',
     template: '#static-template',
   });
 
   // myApp.on('initialize:after', function () {
   console.log('init after');
-  const staticView = new myApp.StaticView();
-  console.log('staticView', staticView);
+
+  const staticView = new myApp.StaticView({
+    id: 'static-view',
+    tagName: 'span',
+    className: 'instruction',
+  });
   myApp.mainRegion.show(staticView);
   // });
 
