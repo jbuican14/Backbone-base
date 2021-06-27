@@ -19,17 +19,24 @@ $(document).ready(() => {
   myApp.Contact = Backbone.Model.extend({
     defaults: {
       firstName: 'Default Name',
+      phoneNumber: 'No phone number!',
     },
   });
 
   myApp.ContactView = Mn.ItemView.extend({
     template: '#contact-template',
+
+    events: {
+      'click p': 'showPhoneNumber',
+    },
+    showPhoneNumber: function () {
+      alert(this.model.escape('phoneNumber'));
+    },
   });
 
   const alice = new myApp.Contact({
-    // firstName: 'Alice',
+    firstName: 'Alice',
     lastName: 'Doe',
-    phoneNumber: '111-11111',
   });
 
   const aliceView = new myApp.ContactView({
@@ -41,29 +48,6 @@ $(document).ready(() => {
   });
 
   myApp.mainRegion.show(aliceView);
-
-  // var RootView = Mn.LayoutView.extend({
-  //   el: 'body',
-  // });
-
-  // myApp.addRegions({
-  //   mainRegion: '#main-region',
-  // });
-
-  // myApp.rootView = new RootView();
-
-  // myApp.StaticView = Mn.ItemView.extend({
-  //   id: 'static-view',
-  //   tagName: 'ul',
-  //   className: 'instruction',
-  //   template: '#list-item-template',
-  // });
-
-  // // myApp.on('initialize:after', function () {
-
-  // const staticView = new myApp.StaticView();
-  // myApp.mainRegion.show(staticView);
-  // // });
 
   myApp.start();
 });
