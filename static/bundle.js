@@ -29,19 +29,15 @@ $(document).ready(() => {
 
   myApp.StaticView = Mn.ItemView.extend({
     id: 'static-view',
-    tagName: 'span',
+    tagName: 'ul',
     className: 'instruction',
-    template: '#static-template',
+    template: '#list-item-template',
   });
 
   // myApp.on('initialize:after', function () {
   console.log('init after');
 
-  const staticView = new myApp.StaticView({
-    id: 'static-view',
-    tagName: 'span',
-    className: 'instruction',
-  });
+  const staticView = new myApp.StaticView();
   myApp.mainRegion.show(staticView);
   // });
 
