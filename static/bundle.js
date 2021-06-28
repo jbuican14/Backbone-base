@@ -27,9 +27,11 @@ myApp.ContactCollection = Backbone.Collection.extend({
 // CREATE ITEM VIEW
 myApp.ContactItemView = Mn.ItemView.extend({
   template: '#contact-list-item',
+  tagName: 'li',
 });
 
 // CREATE COLLECTION VIEW
+// Specify childView instead of itemView:
 myApp.ContactsView = Mn.CollectionView.extend({
   tagName: 'ul',
   // itemView: myApp.ContactItemView,
