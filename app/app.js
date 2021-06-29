@@ -20,6 +20,10 @@ myApp.Contact = Backbone.Model.extend({
 // CREATE COLLECTION
 myApp.ContactCollection = Backbone.Collection.extend({
   model: myApp.Contact,
+  // comparator: 'firstName',
+  comparator: function (contact) {
+    return contact.get('firstName') + ' ' + contact.get('lastName');
+  },
 });
 
 // *** display
@@ -48,6 +52,16 @@ const contacts = new myApp.ContactCollection([
     firstName: 'Alice',
     lastName: 'Arten',
     phoneNumber: '555-0184',
+  },
+  {
+    firstName: 'Alice',
+    lastName: 'Apple',
+    phoneNumber: '555-0184',
+  },
+  {
+    firstName: 'Alice',
+    lastName: 'AAA',
+    phoneNumber: '1234-0184',
   },
   {
     firstName: 'Charlie',
