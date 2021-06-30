@@ -6,8 +6,10 @@ require('bootstrap');
 const Mn = require('backbone.marionette');
 Mn.$ = Backbone.$;
 
-// START APP
+// // START APP
 const myApp = new Mn.Application();
+
+console.log('myapp', myApp);
 
 // CREATE MODEL
 myApp.Contact = Backbone.Model.extend({
@@ -74,9 +76,9 @@ const contactsListView = new myApp.ContactsView({
   collection: contacts,
 });
 
-myApp.addRegions({
-  mainRegion: '#main-region',
-});
+// myApp.addRegions({
+//   mainRegion: '#main-region',
+// });
 
 myApp.mainRegion.show(contactsListView);
 myApp.start();

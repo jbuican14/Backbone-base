@@ -5,7 +5,7 @@
   "main": "app/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "browserify app/app.js > static/bundle.js"
+    "dev": "browserify app/app-v2.js > static/bundle.js"
   },
   "author": "J",
   "license": "ISC",
