@@ -1,10 +1,57 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-// const contactApp = require('../assets/js/app');
+const Backbone = require('backbone');
+const $ = (jQuery = require('jquery-untouched'));
+Backbone.$ = $;
+const _ = require('underscore');
+const Mn = require('backbone.marionette');
+Mn.$ = Backbone.$;
 const ContactApp = require('../assets/js/entities/contact');
 
-ContactApp.Entities.alertPublic('hell');
+// ContactApp.Entities.ContactCollection([
+//   {
+//     firstName: 'Bob',
+//     lastName: 'Brigham',
+//     phoneNumber: '555-0163',
+//   },
+//   {
+//     firstName: 'Alice',
+//     lastName: 'Arten',
+//     phoneNumber: '555-0184',
+//   },
+//   {
+//     firstName: 'Charlie',
+//     lastName: 'Campbell',
+//     phoneNumber: '555-0129',
+//   },
+// ]);
+console.log(contactApp);
+contactApp.ContactItemView = Mn.ItemView.extend({
+  tagName: 'li',
+  template: '#contact-list-item',
+});
 
-},{"../assets/js/entities/contact":2}],2:[function(require,module,exports){
+contactApp.ContactsView = Mn.CollectionView.extend({
+  tagName: 'ul',
+  // itemView: contactApp.ContactItemView,
+  childView: contactApp.ContactItemView,
+});
+
+contactApp.Entities.ContactCollection1();
+
+const contacts = contactApp.request('contact:entities');
+
+const contactsListView = new contactApp.ContactsView({
+  collection: contacts,
+});
+
+contactApp.addRegions({
+  mainRegion: '#main-region',
+});
+
+contactApp.mainRegion.show(contactsListView);
+contactApp.start();
+
+},{"../assets/js/entities/contact":2,"backbone":9,"backbone.marionette":5,"jquery-untouched":10,"underscore":11}],2:[function(require,module,exports){
 const Backbone = require('backbone');
 const $ = (jQuery = require('jquery-untouched'));
 Backbone.$ = $;
@@ -12,26 +59,48 @@ const _ = require('underscore');
 const Mn = require('backbone.marionette');
 Mn.$ = Backbone.$;
 
-// const ContactApp = require('../app');
-ContactApp = new Mn.Application();
+contactApp = new Mn.Application();
 
-console.log('Contact app', ContactApp);
-
-ContactApp.module(
+contactApp.module(
   'Entities',
-  function (Entities, ContactApp, Backbone, Mn, $, _) {
-    const alertPrivate = function (message) {
-      alert(`Private alert:  ${message}`);
+  function (Entities, contactApp, Backbone, Mn, $, _) {
+    let contacts;
+    const initContacts = function () {
+      contacts = new Entities.ContactCollection([
+        {
+          id: 1,
+          firstName: 'Alice',
+          lastName: 'Arten',
+          phoneNumber: '555-0184',
+        },
+      ]);
     };
 
-    Entities.alertPublic = function (message) {
-      alert(`I will now call alertPrivate`);
-      alertPrivate(message);
+    const API = {
+      getContactEntities: function () {
+        if (contacts === undefined) {
+          initContacts();
+        }
+        return contacts;
+      },
     };
+    Entities.Contact = Backbone.Model.extend({});
+
+    Entities.ContactCollection = Backbone.Collection.extend({
+      model: Entities.Contact,
+      comparator: 'firstName',
+    });
+    Entities.ContactCollection1 = function () {
+      console.log('ContactCollection1');
+    };
+
+    contactApp.reqres.setHandler('contact:entities', function () {
+      return API.getContactEntities();
+    });
   }
 );
 
-module.exports = ContactApp;
+module.exports = contactApp;
 
 },{"backbone":9,"backbone.marionette":5,"jquery-untouched":10,"underscore":11}],3:[function(require,module,exports){
 // Backbone.BabySitter
